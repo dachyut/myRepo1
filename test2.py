@@ -1,2 +1,2 @@
 print("hello world")
-print("End of script")
+print("...End of script...")
