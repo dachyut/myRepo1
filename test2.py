@@ -1,2 +1,3 @@
 print("hello world")
-#print("...End of script...")
+print("new line")
+print("...End of script...")
