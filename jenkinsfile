@@ -8,7 +8,9 @@ node
 {
     stage('Checkout')
     {
-        println parseSuiteFile(feature_acceptance_suite)
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'c92bb9fa-189d-49b8-a07b-21f15f885ce7', url: 'https://github.com/dachyut/myRepo1']]])
+        workspace=pwd()
+		println parseSuiteFile(feature_acceptance_suite)
     }
     stage('Static code Analysis')
     {
