@@ -69,5 +69,6 @@ def generateSkipComponentsList (String feature_acceptance_suite) {
 def getClientBuildLocationPathFromSuiteFile (String feature_acceptance_suite) {
     componentsList = parseSuiteFile(feature_acceptance_suite)
     println componentsList['CLIENT_DOWNLOAD_LOCATION']
+	println componentsList['SKIP_CLIENT']
     return componentsList['CLIENT_DOWNLOAD_LOCATION']    
 }
