@@ -62,5 +62,5 @@ def getClientBuildLocationPathFromSuiteFile (String feature_acceptance_suite) {
         return componentsList['CLIENT_DOWNLOAD_LOCATION']
     }
 	
-    return componentsList['CLIENT_DOWNLOAD_LOCATION']    
+    println "SKIP_CLIENT is FALSE"  
 }
