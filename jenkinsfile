@@ -10,24 +10,9 @@ node
     {
         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'c92bb9fa-189d-49b8-a07b-21f15f885ce7', url: 'https://github.com/dachyut/myRepo1']]])
         workspace=pwd()
-		println parseSuiteFile(feature_acceptance_suite)
+		getClientBuildLocationPathFromSuiteFile(feature_acceptance_suite)
     }
-    stage('Static code Analysis')
-    {
-        echo 'Static code Analysis'
-    }
-    stage('Build')
-    {
-        echo 'Build the code'
-    }
-    stage('Unit Testing')
-    {
-        echo 'Unit Testing'
-    }
-    stage('Delivery')
-    {
-        echo 'Deliver the Code'
-    }
+    
 }
 
 /*********************************
@@ -68,6 +53,7 @@ def generateSkipComponentsList (String feature_acceptance_suite) {
 **********************************/
 def getClientBuildLocationPathFromSuiteFile (String feature_acceptance_suite) {
     componentsList = parseSuiteFile(feature_acceptance_suite)
+	println "=======>>>>>"
     println componentsList['CLIENT_DOWNLOAD_LOCATION']
 	println componentsList['SKIP_CLIENT']
     return componentsList['CLIENT_DOWNLOAD_LOCATION']    
