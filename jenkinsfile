@@ -1,10 +1,14 @@
+#!groovy
+import java.lang.String
+
 def workspace;
+String feature_acceptance_suite = 'test.suite'
+
 node
 {
     stage('Checkout')
     {
-        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'c92bb9fa-189d-49b8-a07b-21f15f885ce7', url: 'https://github.com/dachyut/myRepo1']]])
-        workspace=pwd()
+        println parseSuiteFile(feature_acceptance_suite)
     }
     stage('Static code Analysis')
     {
@@ -22,4 +26,46 @@ node
     {
         echo 'Deliver the Code'
     }
+}
+
+/*********************************
+    Parse Suite file
+**********************************/
+def parseSuiteFile (String feature_acceptance_suite) {
+    // Read suite file as string
+	String suiteFile = readFile(feature_acceptance_suite)
+    // split lines
+    buildSwitches = (((suiteFile.split('\n')
+            // remove blank lines
+            .findAll { item -> !item.isEmpty() })
+            // find line contains '='
+            .findAll { it.contains('=') })
+            // collections of switches
+            .collectEntries{ [(it.split("=")[0].trim()): it.split("=")[1].trim()] })
+    return buildSwitches
+}
+
+/*********************************
+    Get SKIP build switches from Suite file
+**********************************/
+def generateSkipComponentsList (String feature_acceptance_suite) {    
+    skipComponentsList = parseSuiteFile(feature_acceptance_suite)
+            // find all switches with TRUE
+            .findAll{ it.value == 'TRUE' }.keySet()
+    if (!skipComponentsList.isEmpty()) {
+        s = skipComponentsList.toString()
+        // Get string between '[' and ']'
+        println("==>>>> ${s.substring(s.indexOf("[") + 1, s.indexOf("]"))}")
+        return s.substring(s.indexOf("[") + 1, s.indexOf("]"))
+    }	
+    return ''
+}
+
+/*********************************
+    Get Client Build Location path from Suite file
+**********************************/
+def getClientBuildLocationPathFromSuiteFile (String feature_acceptance_suite) {
+    componentsList = parseSuiteFile(feature_acceptance_suite)
+    println componentsList['CLIENT_DOWNLOAD_LOCATION']
+    return componentsList['CLIENT_DOWNLOAD_LOCATION']    
 }
