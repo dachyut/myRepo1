@@ -54,10 +54,13 @@ def generateSkipComponentsList (String feature_acceptance_suite) {
 def getClientBuildLocationPathFromSuiteFile (String feature_acceptance_suite) {
     componentsList = parseSuiteFile(feature_acceptance_suite)
 	println "=======>>>>>"
-    println componentsList['CLIENT_DOWNLOAD_LOCATION']
-	println componentsList['SKIP_CLIENT']
-	if (componentsList['SKIP_CLIENT'] == 'TRUE') {
-		println "hello"
-	}
+    if (!componentsList.isEmpty() && componentsList['SKIP_CLIENT'] == 'TRUE') {
+        if(!componentsList['CLIENT_DOWNLOAD_LOCATION']) {
+            error('CLIENT_DOWNLOAD_LOCATION path should be specified if SKIP_CLIENT is true in suite file')
+        }
+        println "SKIP_CLIENT is true. returning CLIENT_DOWNLOAD_LOCATION: ${componentsList['CLIENT_DOWNLOAD_LOCATION']}"
+        return componentsList['CLIENT_DOWNLOAD_LOCATION']
+    }
+	
     return componentsList['CLIENT_DOWNLOAD_LOCATION']    
 }
