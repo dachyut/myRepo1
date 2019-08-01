@@ -56,7 +56,7 @@ def getClientBuildLocationPathFromSuiteFile (String feature_acceptance_suite) {
 	println "=======>>>>>"
 	println componentsList.getClass() 
 	println componentsList.size() 
-	if (componentsList.size()) {
+	if (componentsList.size() == 0) {
 		println "componentsList size is empty"
 	}
 	
