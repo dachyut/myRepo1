@@ -14,15 +14,16 @@ node
     }
     
     stage('url')
-    {            
-              waitUntil {
+    {           
+              
                   try {         
                       	sh "curl -s --head  --request GET  https://mail.yahooAA.com | grep '200'"
                       return true
                   } catch (Exception e) {
+			println "Unbale to ping...."
                         return false
                   }
-              }     
+                   
     }
     
 }
