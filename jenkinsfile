@@ -14,8 +14,7 @@ node
     }
     
     stage('url')
-    {
-	steps {             
+    {            
               waitUntil {
                   try {         
                       	sh "curl -s --head  --request GET  https://mail.yahoo.com | grep '200'"
@@ -23,8 +22,7 @@ node
                   } catch (Exception e) {
                         return false
                   }
-              }
-           }
+              }     
     }
     
 }
