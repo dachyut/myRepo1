@@ -12,6 +12,11 @@ node
         workspace=pwd()
 		getClientBuildLocationPathFromSuiteFile(feature_acceptance_suite)
     }
+
+    stage('url')
+    {
+	sh "curl -s --head  --request GET  https://mail.yahoo.com | grep '200'"
+    }
     
 }
 
