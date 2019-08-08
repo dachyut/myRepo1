@@ -17,7 +17,7 @@ node
     {           
               
                   try {         
-                      	sh "curl -s --head  --request GET  https://mail.yahoo.com | grep '200'"                      
+                      	sh "curl -s --head  --request GET  https://mail.yahooaa.com | grep '200'"                      
                   } catch (Exception e) {
 			error("Unbale to ping....")                        
                   }
