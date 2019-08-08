@@ -18,10 +18,10 @@ node
               
                   try {         
                       	sh "curl -s --head  --request GET  https://mail.yahoo.com | grep '200'"
-                      return true
+                      println "URL checked succesfully...."
                   } catch (Exception e) {
-			println "Unbale to ping...."
-                        return false
+			error("Unbale to ping....")
+                        
                   }
                    
     }
