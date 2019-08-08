@@ -17,12 +17,11 @@ node
     {           
               
                   try {         
-                      	sh "curl -s --head  --request GET  https://mail.yahoo.com | grep '200'"
-                      println "URL checked succesfully...."
+                      	sh "curl -s --head  --request GET  https://mail.yahoo.com | grep '200'"                      
                   } catch (Exception e) {
-			error("Unbale to ping....")
-                        
+			error("Unbale to ping....")                        
                   }
+		println "URL checked succesfully...."
                    
     }
     
