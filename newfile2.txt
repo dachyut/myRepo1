@@ -7,4 +7,4 @@ https://github.com/dachyut/myRepo1.git1
 git diff --name-only
 
 git diff --name-only
-5b18aa082273bc0369b21ea1018b7f84ccc6fef6
+ ${lastChangeSet} ${currChangeSet}5b18aa082273bc0369b21ea1018b7f84ccc6fef6
