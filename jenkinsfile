@@ -12,6 +12,16 @@ node
         workspace=pwd()
 		getClientBuildLocationPathFromSuiteFile(feature_acceptance_suite)
     }
+
+stage('artifacts') {
+	Random random = new Random()
+			ranStr = "RandomStr-" + random.nextInt(10000)
+			bat "echo BRANCH=${env.BRANCH_NAME} > build.properties"	
+			bat "echo RandomString=$ranStr >> build.properties"
+			bat "echo BuildNumber=${env.BUILD_NUMBER} >> build.properties"
+			
+			archiveArtifacts artifacts: 'build.properties', fingerprint: true
+}
     
     stage('url')
     {           
